@@ -1,0 +1,57 @@
+﻿<Window x:Class="Uxxu.VentaPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Uxxu"
+        mc:Ignorable="d"
+        Title="VentaPage" Height="450" Width="800">
+    <Grid>
+        <StackPanel Margin="0,0,0,10" >
+            <StackPanel Margin="10" HorizontalAlignment="Left" Width="586">
+                <TextBlock Text="Cliente" Width="500"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="txtCliente" Width="500"/>
+                    <Button x:Name="btnSearch" Content="Buscar" Width="50" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="782">
+                <StackPanel>
+                    <TextBlock Text="Cantidad"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnMinus" Content="-" Width="30" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+                        <TextBox Width="50"/>
+                        <Button x:Name="btnAdd" Content="+" Width="30" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Width="50"/>
+                <StackPanel>
+                    <TextBlock Text="Producto"/>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="cmbProducts" IsTextSearchEnabled="True" Width="500" BorderBrush="#FFACACAC"/>
+                        <Button x:Name="btnAddProduct" Content="+" Width="20" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <DataGrid x:Name="dataGridProductos" Margin="5" AutoGenerateColumns="False" Height="150" Background="#FFF0F0F0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre Producto" Binding="{Binding NombreProducto}" />
+                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Stock}" />
+                    <DataGridTextColumn Header="Precio" Binding="{Binding PrecioVenta}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel >
+                    <TextBlock Text="TOTAL:"/>
+                    <TextBlock Text="0.00 Bs."/>
+                </StackPanel>
+                <StackPanel Width="20"/>
+                <Button x:Name="btnPay" Content="COBRAR" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+            </StackPanel>
+        </StackPanel>
+
+
+    </Grid>
+
+</Window>
