@@ -45,5 +45,12 @@ namespace Uxxu
             productoPage.Show();
             this.Close();
         }
+
+        private void btnReport_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var productoPage = new ReporteVenta();
+            productoPage.Show();
+            this.Close();
+        }
     }
 }

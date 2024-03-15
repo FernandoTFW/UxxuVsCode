@@ -12,6 +12,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="5">
+            <Button Margin="0,20,120,0" x:Name="btnBack" Content="Atras" Width="50" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold" Click="btnBack_Click" />
             <Label Content="Nombre" />
             <TextBox x:Name="txtNombreProducto" />
             <Label Content="Precio" />

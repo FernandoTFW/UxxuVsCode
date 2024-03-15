@@ -22,6 +22,11 @@
                 <Image Source="   https://cdn-icons-png.flaticon.com/512/3847/3847789.png " Width="100" Height="100"/>
                 <TextBlock Text="Proveedores" Margin="5" TextAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
+            <Separator VerticalAlignment="Center" Margin="100,0,0,0" Width="2" Background="Black" />
+            <StackPanel x:Name="btnReport" VerticalAlignment="Center" MouseLeftButtonDown="btnReport_MouseLeftButtonDown">
+                <Image Source="https://cdn-icons-png.flaticon.com/512/5674/5674015.png" Width="100" Height="100"/>
+                <TextBlock Text="Reporte Ventas" Margin="5" TextAlignment="Center" FontWeight="Bold"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

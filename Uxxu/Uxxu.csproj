@@ -73,6 +73,10 @@
     <Compile Include="DetalleVenta.cs">
       <DependentUpon>ModelUxxu.tt</DependentUpon>
     </Compile>
+    <Compile Include="InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Logued.cs" />
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -93,6 +97,9 @@
     <Compile Include="ProveedorPage.xaml.cs">
       <DependentUpon>ProveedorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReporteVenta.xaml.cs">
+      <DependentUpon>ReporteVenta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UsuariosVenta.cs">
       <DependentUpon>ModelUxxu.tt</DependentUpon>
     </Compile>
@@ -102,6 +109,10 @@
     <Compile Include="VentaPage.xaml.cs">
       <DependentUpon>VentaPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="InputDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -123,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProveedorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteVenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

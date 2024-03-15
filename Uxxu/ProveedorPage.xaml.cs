@@ -111,6 +111,11 @@ namespace Uxxu
             dataGridProveedores.ItemsSource = proveedores;
         }
 
-
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+            this.Close();
+        }
     }
 }

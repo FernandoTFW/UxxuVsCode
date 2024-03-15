@@ -7,12 +7,14 @@
         mc:Ignorable="d"
         Title="VentaPage" Height="450" Width="800">
     <Grid>
+        
         <StackPanel Margin="0,0,0,10" >
+            <Button Margin="0,20,720,0" x:Name="btnBack" Content="Atras" Width="50" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold" Click="btnBack_Click" />
             <StackPanel Margin="10" HorizontalAlignment="Left" Width="586">
                 <TextBlock Text="Cliente" Width="500"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="txtCliente" Width="500"/>
-                    <Button x:Name="btnSearch" Content="Buscar" Width="50" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+                    <Button x:Name="btnSearch" Content="Buscar" Width="50" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold" Click="btnSearch_Click"/>
                 </StackPanel>
 
             </StackPanel>
@@ -20,34 +22,38 @@
                 <StackPanel>
                     <TextBlock Text="Cantidad"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="btnMinus" Content="-" Width="30" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
-                        <TextBox Width="50"/>
-                        <Button x:Name="btnAdd" Content="+" Width="30" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+                        <Button x:Name="btnMinus" Content="-" Width="30" Background="#FFE95D57" Foreground="White" FontWeight="Bold" Click="btnMinus_Click"/>
+                        <TextBox x:Name="txbCantidad" Width="50" TextChanged="txbCantidad_TextChanged" TextAlignment="Center"/>
+                        <Button x:Name="btnAdd" Content="+" Width="30" Background="#FFE95D57" Foreground="White" FontWeight="Bold" Click="btnAdd_Click"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Width="50"/>
                 <StackPanel>
                     <TextBlock Text="Producto"/>
                     <StackPanel Orientation="Horizontal">
-                        <ComboBox x:Name="cmbProducts" IsTextSearchEnabled="True" Width="500" BorderBrush="#FFACACAC"/>
-                        <Button x:Name="btnAddProduct" Content="+" Width="20" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+                        <ComboBox x:Name="cmbProducts" IsTextSearchEnabled="True" Width="500" BorderBrush="#FFACACAC"
+                                  DisplayMemberPath="NombreProducto" 
+                                SelectedValuePath="IdProducto" 
+                                ItemsSource="{Binding Producto}"/>
+                        <Button x:Name="btnAddProduct" Content="+" Width="20" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold" Click="btnAddProduct_Click"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
             <DataGrid x:Name="dataGridProductos" Margin="5" AutoGenerateColumns="False" Height="150" Background="#FFF0F0F0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre Producto" Binding="{Binding NombreProducto}" />
-                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Stock}" />
-                    <DataGridTextColumn Header="Precio" Binding="{Binding PrecioVenta}" />
+                    <DataGridTextColumn Header="Nombre Producto" Binding="{Binding Producto.NombreProducto}" />
+                    <DataGridTextColumn Header="Precio" Binding="{Binding Cantidad}" />
+                    <DataGridTextColumn Header="Precio" Binding="{Binding Producto.Precio}" />
+                    
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel >
                     <TextBlock Text="TOTAL:"/>
-                    <TextBlock Text="0.00 Bs."/>
+                    <TextBlock x:Name="txtTotal" Text="0.00 Bs."/>
                 </StackPanel>
                 <StackPanel Width="20"/>
-                <Button x:Name="btnPay" Content="COBRAR" Background="#FFE95D57" Foreground="White" FontWeight="Bold"/>
+                <Button x:Name="btnPay" Content="COBRAR" Background="#FFE95D57" Foreground="White" FontWeight="Bold" Click="btnPay_Click"/>
             </StackPanel>
         </StackPanel>
 

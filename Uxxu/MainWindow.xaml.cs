@@ -43,6 +43,7 @@ namespace Uxxu
             if (autenticado)
             {
                 // Mostrar la ventana Menu
+                
                 Menu menu = new Menu();
                 menu.Show();
                 this.Close();
@@ -58,6 +59,10 @@ namespace Uxxu
             using (var contexto = new UxxuEntities())
             {
                 var usuario = await contexto.UsuariosVenta.FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario && u.Contrasena == contrasena);
+                if (usuario != null)
+                {
+                    Logued.User = usuario;
+                }
                 return usuario != null;
             }
         }

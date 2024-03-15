@@ -1,0 +1,39 @@
+﻿<Window x:Class="Uxxu.ReporteVenta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Uxxu"
+        mc:Ignorable="d"
+        Title="ReporteVenta" Height="700" Width="800">
+    <Grid>
+        <StackPanel Margin="10">
+            <Button Margin="0,20,720,0" x:Name="btnBack" Content="Atras" Width="50" Height="20" Background="#FFE95D57" Foreground="White" FontWeight="Bold" Click="btnBack_Click" />
+            <TextBlock Text="Reporte de Ventas" FontSize="18" FontWeight="Bold" />
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Fecha Desde:" />
+                <DatePicker x:Name="dpFechaDesde" SelectedDate="{Binding FechaDesde}" />
+                <TextBlock Text="Fecha Hasta:" />
+                <DatePicker x:Name="dpFechaHasta" SelectedDate="{Binding FechaHasta}" />
+                <Button x:Name="btnFiltrar" Content="Filtrar" Click="BtnFiltrar_Click" />
+            </StackPanel>
+            <DataGrid x:Name="dgVentas" Margin="10" Height="200" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="DgVentas_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Fecha Venta" Binding="{Binding FechaVenta}" />
+                    <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nombre}" />
+                    <DataGridTextColumn Header="Apellido" Binding="{Binding Cliente.Apellido}" />
+                    <DataGridTextColumn Header="Total" Binding="{Binding TotalVenta}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Text="Detalle de Venta" FontSize="16" FontWeight="Bold" Margin="10" />
+            <DataGrid x:Name="dgDetalleVenta" Margin="10" Height="200" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Producto" Binding="{Binding Producto.NombreProducto}" />
+                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" />
+                    <DataGridTextColumn Header="Precio" Binding="{Binding PrecioVenta}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+
+</Window>
