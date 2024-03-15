@@ -65,6 +65,7 @@ namespace Uxxu
 
         private void CargarProveedores()
         {
+            db = new UxxuEntities();
             var proveedoresDb = db.Proveedor.ToList();
             proveedores = proveedoresDb;
             cmbProveedores.ItemsSource = proveedores;
@@ -72,6 +73,7 @@ namespace Uxxu
 
         private void CargarProductos()
         {
+            db = new UxxuEntities();
             var productosDb = db.Producto.ToList();
             products = productosDb;
             dataGridProductos.ItemsSource = products;
@@ -140,6 +142,7 @@ namespace Uxxu
             txtNombreProducto.Text = producto.NombreProducto;
             txtPrecioProducto.Text = producto.Precio.ToString();
             txtStockProducto.Text = producto.Stock.ToString();
+            urlImagen = producto.UrlProducto;
             // Crea una nueva instancia de BitmapImage
             BitmapImage bitmapImage = new BitmapImage();
 

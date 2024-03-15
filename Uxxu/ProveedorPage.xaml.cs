@@ -56,6 +56,10 @@ namespace Uxxu
                 {
                     db.Proveedor.Add(proveedor);
                     await db.SaveChangesAsync();
+                    txtCorreoElectronico.Text = "";
+                    txtDireccion.Text = "";
+                    txtTelefono.Text = "";
+                    txtNombreProveedor.Text = "";
                     Actualizar();
                 }
                 
@@ -108,6 +112,7 @@ namespace Uxxu
 
         private void Actualizar()
         {
+            db = new UxxuEntities();
             proveedores = db.Proveedor.ToList();
             dataGridProveedores.ItemsSource = proveedores;
         }

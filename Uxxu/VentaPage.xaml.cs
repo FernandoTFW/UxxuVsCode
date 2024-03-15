@@ -249,6 +249,7 @@ namespace Uxxu
         private void LimpiarVenta()
         {
             txtCliente.Text = "";
+            txtTotal.Text = "0 Bs.";
             cliente = null;
             ventaItems.Clear();
             dataGridProductos.Items.Refresh();
@@ -322,7 +323,7 @@ namespace Uxxu
                 db.Cliente.Add(newCliente);
                 db.SaveChanges();
                 cliente = newCliente;
-                txtCliente.Text = cliente.Nombre;
+                txtCliente.Text = cliente.Nombre + " " + cliente.Apellido;
 
                 // Mostrar un mensaje de éxito
                 MessageBox.Show("Cliente creado exitosamente");
