@@ -26,6 +26,7 @@ namespace Uxxu
         public MainWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {

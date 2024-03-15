@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Net.Mail;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -28,6 +29,7 @@ namespace Uxxu
         public VentaPage()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             ventaItems = new List<VentaItem>();
             dataGridProductos.ItemsSource = ventaItems;
             txtCliente.Text = ""; // Set initial client text
@@ -133,6 +135,7 @@ namespace Uxxu
                     ventaItems.Add(new VentaItem(producto, cantidad));
                 }
                 dataGridProductos.Items.Refresh(); // Update data grid
+                txbCantidad.Text = "0";
                 CalcularTotal();
             }
             else
@@ -201,6 +204,38 @@ namespace Uxxu
 
                     transaction.Commit();
                     MessageBox.Show("Venta registrada exitosamente");
+                    string emailCliente = cliente.Email;
+
+                    // Suponiendo que tengas un método para generar el cuerpo del correo electrónico basado en la venta
+                    string cuerpoCorreo = GenerarCuerpoCorreo(venta, ventaItems);
+
+                    // Configurar el cliente SMTP para enviar el correo electrónico
+                    SmtpClient smtpClient = new SmtpClient("smtp-mail.outlook.com")
+                    {
+                        Port = 587,
+                        Credentials = new System.Net.NetworkCredential("fernandoaparicioestrada@hotmail.com", "18noviembre"),
+                        EnableSsl = true,
+                        
+                    };
+
+                    // Construir el mensaje de correo electrónico
+                    MailMessage mensaje = new MailMessage("fernandoaparicioestrada@hotmail.com", emailCliente)
+                    {
+                        Subject = "Detalles de tu compra",
+                        Body = cuerpoCorreo,
+                        IsBodyHtml = true // Si el cuerpo del correo es HTML
+                    };
+
+                    try
+                    {
+                        // Enviar el correo electrónico
+                        smtpClient.Send(mensaje);
+                        Console.WriteLine("Correo electrónico enviado exitosamente");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error al enviar el correo electrónico: " + ex.Message);
+                    }
                     LimpiarVenta();
                 }
                 catch (Exception ex)
@@ -219,6 +254,30 @@ namespace Uxxu
             dataGridProductos.Items.Refresh();
             total = 0;
         }
+        private string GenerarCuerpoCorreo(Venta venta, List<VentaItem> ventaItems)
+        {
+            StringBuilder bodyBuilder = new StringBuilder();
+
+            // Construir la tabla de detalles de la venta
+            bodyBuilder.AppendLine("<table border='1'>");
+            bodyBuilder.AppendLine("<tr><th>Producto</th><th>Cantidad</th><th>Precio</th></tr>");
+
+            foreach (var ventaItem in ventaItems)
+            {
+                bodyBuilder.AppendLine("<tr>");
+                bodyBuilder.AppendLine("<td>" + ventaItem.Producto.NombreProducto + "</td>");
+                bodyBuilder.AppendLine("<td>" + ventaItem.Cantidad + "</td>");
+                bodyBuilder.AppendLine("<td>" + ventaItem.Producto.Precio + "</td>");
+                bodyBuilder.AppendLine("</tr>");
+            }
+
+            bodyBuilder.AppendLine("</table>");
+
+            // Mostrar el total de la venta
+            bodyBuilder.AppendLine("<p>Total: " + venta.TotalVenta + "</p>");
+
+            return bodyBuilder.ToString();
+        }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -229,35 +288,19 @@ namespace Uxxu
 
         void AddClient()
         {
-            // Mostrar un MessageBox para obtener la información del cliente
-            var result = MessageBox.Show(
-              "Ingrese la información del nuevo cliente:",
-              "Nuevo Cliente",
-              MessageBoxButton.OKCancel,
-              MessageBoxImage.Information,
-              MessageBoxResult.None,
-              MessageBoxOptions.DefaultDesktopOnly);
+            InputDialog dialog = new InputDialog();
+            dialog.Title = "Nuevo Cliente";
+            dialog.Labels = new string[] { "Nombre", "Apellido", "NIT", "Email", "Teléfono" };
+            dialog.TextBoxes = new TextBox[] { new TextBox(), new TextBox(), new TextBox(), new TextBox(), new TextBox() };
+            dialog.Init();
 
-            if (result == MessageBoxResult.OK)
+            if (dialog.ShowDialog() == true)
             {
-                string nombre = "";
-                string apellido = "";
-                string nit = "";
-                string email = "";
-                string telefono = "";
-                InputDialog dialog = new InputDialog();
-                dialog.Title = "Nuevo Cliente";
-                dialog.Labels = new string[] { "Nombre", "Apellido", "NIT", "Email", "Teléfono" };
-                dialog.TextBoxes = new TextBox[] { new TextBox(), new TextBox(), new TextBox(), new TextBox(), new TextBox() };
-                dialog.Init();
-                if (dialog.ShowDialog() == true)
-                {
-                    nombre = dialog.TextBoxes[0].Text;
-                    apellido = dialog.TextBoxes[1].Text;
-                    nit = dialog.TextBoxes[2].Text;
-                    email = dialog.TextBoxes[3].Text;
-                    telefono = dialog.TextBoxes[4].Text;
-                }
+                string nombre = dialog.TextBoxes[0].Text;
+                string apellido = dialog.TextBoxes[1].Text;
+                string nit = dialog.TextBoxes[2].Text;
+                string email = dialog.TextBoxes[3].Text;
+                string telefono = dialog.TextBoxes[4].Text;
 
                 // Validar los datos del cliente
                 if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(nit) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(telefono))
@@ -267,20 +310,25 @@ namespace Uxxu
                 }
 
                 // Agregar el nuevo cliente a la base de datos
-                var cliente = new Cliente() {
-                    Nombre = nombre, 
-                    Apellido =  apellido, 
-                    NIT =  nit, 
-                    Email = email, 
-                    Telefono = telefono };
-                
-                db.Cliente.Add(cliente);
+                var newCliente = new Cliente()
+                {
+                    Nombre = nombre,
+                    Apellido = apellido,
+                    NIT = nit,
+                    Email = email,
+                    Telefono = telefono
+                };
+
+                db.Cliente.Add(newCliente);
                 db.SaveChanges();
+                cliente = newCliente;
+                txtCliente.Text = cliente.Nombre;
 
                 // Mostrar un mensaje de éxito
                 MessageBox.Show("Cliente creado exitosamente");
             }
-    }
+        }
+
     }
 
     public class VentaItem

@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="10">
         <StackPanel>
+            <Label Content="UXXU" Margin="20" FontWeight="Bold" FontFamily="Arial Black" FontSize="48" Foreground="Red"  HorizontalAlignment="Center" Background="#FFFFF000"/>
             <Label Content="Usuario:" Margin="5"/>
             <TextBox x:Name="txtUsuario" Margin="5"/>
             <Label Content="Contraseña:" Margin="5"/>

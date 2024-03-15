@@ -30,6 +30,7 @@ namespace Uxxu
         public ReporteVenta()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             ventas = new List<Venta>();
             detalleVenta = new List<DetalleVenta>();
             dgVentas.ItemsSource = ventas;

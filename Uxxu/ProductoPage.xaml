@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Uxxu"
         mc:Ignorable="d"
-        Title="ProductoPage" Height="450" Width="800">
+        Title="ProductoPage" Height="500" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -20,7 +20,8 @@
             <Label Content="Stock" />
             <TextBox x:Name="txtStockProducto" />
             <Label Content="URL Imagen" />
-            <TextBox x:Name="txtUrlProducto" />
+            <Button Content="Seleccionar Imagen" Click="SelectImage_Click" Grid.Row="1" Margin="5"/>
+            <Image x:Name="imgProducto" Width="100" Height="100" Margin="5" Stretch="Uniform"/>
             <Label Content="Proveedor" />
             <ComboBox x:Name="cmbProveedores" 
                       DisplayMemberPath="NombreProveedor" 

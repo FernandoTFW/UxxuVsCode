@@ -27,6 +27,7 @@ namespace Uxxu
         public ProveedorPage()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Actualizar();
             
             // Cargar proveedores de la base de datos...

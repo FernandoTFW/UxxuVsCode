@@ -27,7 +27,7 @@ namespace Uxxu
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Title = "Nuevo Cliente";
             Width = 400;
-            Height = 250;
+            Height = 700;
 
         }
 
@@ -36,50 +36,48 @@ namespace Uxxu
             var grid = new Grid();
             grid.Width = 400;
             grid.Height = 420;
-            Content = grid;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+            // Crear un contenedor para los campos de entrada
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Margin = new Thickness(10);
+
+            // Agregar las etiquetas y los campos de texto
             for (int i = 0; i < Labels.Length; i++)
             {
-                var label = new Label();
+                Label label = new Label();
                 label.Content = Labels[i];
-                label.Margin = new Thickness(5);
-                Grid.SetRow(label, i);
-                Grid.SetColumn(label, 0);
+                stackPanel.Children.Add(label);
 
-                var textBox = new TextBox();
-                textBox.Margin = new Thickness(5);
-                Grid.SetRow(textBox, i);
-                Grid.SetColumn(textBox, 1);
-
-                grid.Children.Add(label);
-                grid.Children.Add(textBox);
+                TextBox textBox = new TextBox();
+                TextBoxes[i] = textBox;
+                stackPanel.Children.Add(textBox);
             }
 
-            var buttonOk = new Button();
-            buttonOk.Content = "Aceptar";
-            buttonOk.Margin = new Thickness(5);
-            buttonOk.Click += ButtonOk_Click;
-            Grid.SetRow(buttonOk, Labels.Length);
-            Grid.SetColumn(buttonOk, 1);
+            // Crear botones de aceptar y cancelar
+            Button btnAceptar = new Button();
+            btnAceptar.Content = "Aceptar";
+            btnAceptar.Click += BtnAceptar_Click;
 
-            var buttonCancel = new Button();
-            buttonCancel.Content = "Cancelar";
-            buttonCancel.Margin = new Thickness(5);
-            buttonCancel.Click += ButtonCancel_Click;
-            Grid.SetRow(buttonCancel, Labels.Length);
-            Grid.SetColumn(buttonCancel, 2);
+            Button btnCancelar = new Button();
+            btnCancelar.Content = "Cancelar";
+            btnCancelar.Click += BtnCancelar_Click;
 
-            grid.Children.Add(buttonOk);
-            grid.Children.Add(buttonCancel);
+            // Agregar botones al contenedor
+            stackPanel.Children.Add(btnAceptar);
+            stackPanel.Children.Add(btnCancelar);
+
+            // Agregar el contenedor a la ventana
+            Content = stackPanel;
         }
 
-        private void ButtonOk_Click(object sender, RoutedEventArgs e)
+        private void BtnAceptar_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
             Close();
         }
 
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
             Close();

@@ -23,6 +23,7 @@ namespace Uxxu
         public Menu()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void btnProvider_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
