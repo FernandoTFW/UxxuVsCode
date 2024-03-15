@@ -213,13 +213,13 @@ namespace Uxxu
                     SmtpClient smtpClient = new SmtpClient("smtp-mail.outlook.com")
                     {
                         Port = 587,
-                        Credentials = new System.Net.NetworkCredential("fernandoaparicioestrada@hotmail.com", "18noviembre"),
+                        Credentials = new System.Net.NetworkCredential("xxxxxxx", "xxxxxxx"),
                         EnableSsl = true,
                         
                     };
 
                     // Construir el mensaje de correo electrónico
-                    MailMessage mensaje = new MailMessage("fernandoaparicioestrada@hotmail.com", emailCliente)
+                    MailMessage mensaje = new MailMessage("xxxxxxxx", emailCliente)
                     {
                         Subject = "Detalles de tu compra",
                         Body = cuerpoCorreo,
